@@ -17,6 +17,7 @@ namespace TradeWidget
     public partial class Form1 : Form
     {
         private static int NextOrderId;
+        private static bool NextOrderReceived;
         private static IBClient client;
         private static Equity Ticker;
         private static bool order_placed = false;
@@ -232,6 +233,16 @@ namespace TradeWidget
         // FORM EVENT HANDLERS
         private void btn_order_Click(object sender, EventArgs e)
         {
+            order_placed = false;
+            NextOrderReceived = false;
+
+            // Get Next Valid ID
+            GetNextId();
+            while (!NextOrderReceived)
+            {
+                Thread.Sleep(100);
+            }
+
             if (!String.IsNullOrEmpty(txtbox_ticker.Text) && !String.IsNullOrEmpty(txtbox_entry.Text) && !String.IsNullOrEmpty(txtbox_stoploss.Text) && !String.IsNullOrEmpty(txtbox_risk.Text)
                 && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
                 && (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) <= decimal.Parse(txtbox_risk.Text))
@@ -247,7 +258,6 @@ namespace TradeWidget
                 
                 while (!order_placed)
                 {
-                    GetNextId();
                     if (order_error)
                     {
                         switch (order_error_count)
@@ -445,6 +455,7 @@ namespace TradeWidget
         {
             Console.WriteLine("Next Valid Id: " + e.OrderId);
             NextOrderId = e.OrderId;
+            NextOrderReceived = true;
         }
 
         static void client_TickSize(object sender, TickSizeEventArgs e)
@@ -458,7 +469,7 @@ namespace TradeWidget
                 order_error = true;
 
             Console.WriteLine("Error: " + e.ErrorMsg);
-            /*MessageBox.Show("Error: " + e.ErrorMsg);*/
+            MessageBox.Show("Error: " + e.ErrorMsg);
         }
 
         static void client_TickPrice(object sender, TickPriceEventArgs e)
