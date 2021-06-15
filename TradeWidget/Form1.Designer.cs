@@ -30,6 +30,7 @@ namespace TradeWidget
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +51,36 @@ namespace TradeWidget
             this.error_risk = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_buyingpower = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_plan = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ordertable = new System.Windows.Forms.DataGridView();
+            this.table_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table_symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table_entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table_stoploss = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip_file = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_file_exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_tools = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_tools_orderhist = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_help = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_help_guide = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbox_plan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.error_ticker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_entry)).BeginInit();
@@ -57,12 +88,14 @@ namespace TradeWidget
             ((System.ComponentModel.ISupportInitialize)(this.error_risk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_buyingpower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_plan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordertable)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 25);
+            this.label1.Location = new System.Drawing.Point(16, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 0;
@@ -71,7 +104,7 @@ namespace TradeWidget
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 59);
+            this.label2.Location = new System.Drawing.Point(20, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 15);
             this.label2.TabIndex = 1;
@@ -80,7 +113,7 @@ namespace TradeWidget
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 97);
+            this.label3.Location = new System.Drawing.Point(3, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 15);
             this.label3.TabIndex = 2;
@@ -89,7 +122,7 @@ namespace TradeWidget
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 133);
+            this.label4.Location = new System.Drawing.Point(20, 149);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 15);
             this.label4.TabIndex = 3;
@@ -98,7 +131,7 @@ namespace TradeWidget
             // txtbox_ticker
             // 
             this.txtbox_ticker.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtbox_ticker.Location = new System.Drawing.Point(62, 22);
+            this.txtbox_ticker.Location = new System.Drawing.Point(62, 38);
             this.txtbox_ticker.Name = "txtbox_ticker";
             this.txtbox_ticker.Size = new System.Drawing.Size(97, 23);
             this.txtbox_ticker.TabIndex = 4;
@@ -106,7 +139,7 @@ namespace TradeWidget
             // 
             // txtbox_entry
             // 
-            this.txtbox_entry.Location = new System.Drawing.Point(62, 56);
+            this.txtbox_entry.Location = new System.Drawing.Point(62, 72);
             this.txtbox_entry.Name = "txtbox_entry";
             this.txtbox_entry.Size = new System.Drawing.Size(97, 23);
             this.txtbox_entry.TabIndex = 5;
@@ -115,7 +148,7 @@ namespace TradeWidget
             // 
             // txtbox_stoploss
             // 
-            this.txtbox_stoploss.Location = new System.Drawing.Point(62, 94);
+            this.txtbox_stoploss.Location = new System.Drawing.Point(62, 110);
             this.txtbox_stoploss.Name = "txtbox_stoploss";
             this.txtbox_stoploss.Size = new System.Drawing.Size(97, 23);
             this.txtbox_stoploss.TabIndex = 6;
@@ -124,7 +157,7 @@ namespace TradeWidget
             // 
             // txtbox_risk
             // 
-            this.txtbox_risk.Location = new System.Drawing.Point(62, 130);
+            this.txtbox_risk.Location = new System.Drawing.Point(62, 146);
             this.txtbox_risk.Name = "txtbox_risk";
             this.txtbox_risk.Size = new System.Drawing.Size(97, 23);
             this.txtbox_risk.TabIndex = 7;
@@ -133,7 +166,7 @@ namespace TradeWidget
             // 
             // btn_order
             // 
-            this.btn_order.Location = new System.Drawing.Point(62, 179);
+            this.btn_order.Location = new System.Drawing.Point(62, 195);
             this.btn_order.Name = "btn_order";
             this.btn_order.Size = new System.Drawing.Size(80, 42);
             this.btn_order.TabIndex = 8;
@@ -144,7 +177,7 @@ namespace TradeWidget
             // txtbox_buyingpower
             // 
             this.txtbox_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbox_buyingpower.Location = new System.Drawing.Point(204, 447);
+            this.txtbox_buyingpower.Location = new System.Drawing.Point(175, 447);
             this.txtbox_buyingpower.Name = "txtbox_buyingpower";
             this.txtbox_buyingpower.Size = new System.Drawing.Size(154, 23);
             this.txtbox_buyingpower.TabIndex = 10;
@@ -154,7 +187,7 @@ namespace TradeWidget
             // 
             this.label_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_buyingpower.AutoSize = true;
-            this.label_buyingpower.Location = new System.Drawing.Point(118, 451);
+            this.label_buyingpower.Location = new System.Drawing.Point(89, 451);
             this.label_buyingpower.Name = "label_buyingpower";
             this.label_buyingpower.Size = new System.Drawing.Size(83, 15);
             this.label_buyingpower.TabIndex = 11;
@@ -189,7 +222,7 @@ namespace TradeWidget
             this.grpbox_plan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpbox_plan.Controls.Add(this.radiobtn_1R2R);
             this.grpbox_plan.Controls.Add(this.radiobtn_2RAON);
-            this.grpbox_plan.Location = new System.Drawing.Point(204, 25);
+            this.grpbox_plan.Location = new System.Drawing.Point(175, 41);
             this.grpbox_plan.Name = "grpbox_plan";
             this.grpbox_plan.Size = new System.Drawing.Size(130, 140);
             this.grpbox_plan.TabIndex = 15;
@@ -220,11 +253,243 @@ namespace TradeWidget
             // 
             this.error_plan.ContainerControl = this;
             // 
+            // ordertable
+            // 
+            this.ordertable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ordertable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ordertable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.ordertable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ordertable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.table_qty,
+            this.table_symbol,
+            this.table_entry,
+            this.table_stoploss});
+            this.ordertable.Location = new System.Drawing.Point(20, 260);
+            this.ordertable.Name = "ordertable";
+            this.ordertable.RowHeadersVisible = false;
+            this.ordertable.RowTemplate.Height = 25;
+            this.ordertable.Size = new System.Drawing.Size(292, 172);
+            this.ordertable.TabIndex = 16;
+            // 
+            // table_qty
+            // 
+            this.table_qty.HeaderText = "Quantity";
+            this.table_qty.Name = "table_qty";
+            this.table_qty.ReadOnly = true;
+            // 
+            // table_symbol
+            // 
+            this.table_symbol.HeaderText = "Symbol";
+            this.table_symbol.Name = "table_symbol";
+            this.table_symbol.ReadOnly = true;
+            // 
+            // table_entry
+            // 
+            this.table_entry.HeaderText = "Entry";
+            this.table_entry.Name = "table_entry";
+            this.table_entry.ReadOnly = true;
+            // 
+            // table_stoploss
+            // 
+            this.table_stoploss.HeaderText = "Stoploss";
+            this.table_stoploss.Name = "table_stoploss";
+            this.table_stoploss.ReadOnly = true;
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.newToolStripMenuItem.Text = "&New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.openToolStripMenuItem.Text = "&Open";
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.saveToolStripMenuItem.Text = "&Save";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.saveAsToolStripMenuItem.Text = "Save &As";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 6);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
+            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.printToolStripMenuItem.Text = "&Print";
+            // 
+            // printPreviewToolStripMenuItem
+            // 
+            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
+            this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.undoToolStripMenuItem.Text = "&Undo";
+            // 
+            // redoToolStripMenuItem
+            // 
+            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.redoToolStripMenuItem.Text = "&Redo";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripMenuItem.Image")));
+            this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cutToolStripMenuItem.Text = "Cu&t";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
+            this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Text = "&Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripMenuItem.Image")));
+            this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Text = "&Paste";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.selectAllToolStripMenuItem.Text = "Select &All";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip_file,
+            this.menuStrip_tools,
+            this.menuStrip_help});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(330, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuStrip_file
+            // 
+            this.menuStrip_file.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip_file_exit});
+            this.menuStrip_file.Name = "menuStrip_file";
+            this.menuStrip_file.Size = new System.Drawing.Size(37, 20);
+            this.menuStrip_file.Text = "&File";
+            // 
+            // menuStrip_file_exit
+            // 
+            this.menuStrip_file_exit.Name = "menuStrip_file_exit";
+            this.menuStrip_file_exit.Size = new System.Drawing.Size(93, 22);
+            this.menuStrip_file_exit.Text = "Exit";
+            this.menuStrip_file_exit.Click += new System.EventHandler(this.menuStrip_file_exit_Click);
+            // 
+            // menuStrip_tools
+            // 
+            this.menuStrip_tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip_tools_orderhist});
+            this.menuStrip_tools.Name = "menuStrip_tools";
+            this.menuStrip_tools.Size = new System.Drawing.Size(46, 20);
+            this.menuStrip_tools.Text = "&Tools";
+            // 
+            // menuStrip_tools_orderhist
+            // 
+            this.menuStrip_tools_orderhist.Checked = true;
+            this.menuStrip_tools_orderhist.CheckOnClick = true;
+            this.menuStrip_tools_orderhist.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menuStrip_tools_orderhist.Name = "menuStrip_tools_orderhist";
+            this.menuStrip_tools_orderhist.Size = new System.Drawing.Size(145, 22);
+            this.menuStrip_tools_orderhist.Text = "Order History";
+            this.menuStrip_tools_orderhist.Click += new System.EventHandler(this.menuStrip_tools_orderhist_Click);
+            // 
+            // menuStrip_help
+            // 
+            this.menuStrip_help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip_help_guide});
+            this.menuStrip_help.Name = "menuStrip_help";
+            this.menuStrip_help.Size = new System.Drawing.Size(44, 20);
+            this.menuStrip_help.Text = "&Help";
+            // 
+            // menuStrip_help_guide
+            // 
+            this.menuStrip_help_guide.Name = "menuStrip_help_guide";
+            this.menuStrip_help_guide.Size = new System.Drawing.Size(105, 22);
+            this.menuStrip_help_guide.Text = "Guide";
+            this.menuStrip_help_guide.Click += new System.EventHandler(this.menuStrip_help_guide_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 471);
+            this.ClientSize = new System.Drawing.Size(330, 471);
+            this.Controls.Add(this.ordertable);
             this.Controls.Add(this.grpbox_plan);
             this.Controls.Add(this.label_buyingpower);
             this.Controls.Add(this.txtbox_buyingpower);
@@ -237,6 +502,7 @@ namespace TradeWidget
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.grpbox_plan.ResumeLayout(false);
@@ -247,6 +513,9 @@ namespace TradeWidget
             ((System.ComponentModel.ISupportInitialize)(this.error_risk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_buyingpower)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_plan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordertable)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,6 +543,40 @@ namespace TradeWidget
         private System.Windows.Forms.ErrorProvider error_risk;
         private System.Windows.Forms.ErrorProvider error_buyingpower;
         private System.Windows.Forms.ErrorProvider error_plan;
+        private System.Windows.Forms.DataGridView ordertable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_symbol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_entry;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_stoploss;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_edit;
+        private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_file;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_file_exit;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_tools;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_tools_orderhist;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_help;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_help_guide;
     }
 }
 

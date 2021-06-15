@@ -116,6 +116,9 @@ namespace TradeWidget
             client.PlaceOrder(bracket.takeprofit.OrderId, Ticker, bracket.takeprofit);
             client.PlaceOrder(bracket.MarketOnCLose.OrderId, Ticker, bracket.MarketOnCLose);
             client.PlaceOrder(bracket.stopLoss.OrderId, Ticker, bracket.stopLoss);
+
+            // Include in Table
+            ordertable.Rows.Add(bracket.parent.TotalQuantity, txtbox_ticker.Text, txtbox_entry.Text, txtbox_stoploss.Text);
         }
 
         public void Place_Double_Bracket_Order(Equity Ticker)
@@ -228,6 +231,9 @@ namespace TradeWidget
             client.PlaceOrder(bracket_2.takeprofit.OrderId, Ticker, bracket_2.takeprofit);
             client.PlaceOrder(bracket_2.MarketOnCLose.OrderId, Ticker, bracket_2.MarketOnCLose);
             client.PlaceOrder(bracket_2.stopLoss.OrderId, Ticker, bracket_2.stopLoss);
+
+            // Include in Table
+            ordertable.Rows.Add(quantity, txtbox_ticker.Text, txtbox_entry.Text, txtbox_stoploss.Text);
         }
 
         // FORM EVENT HANDLERS
@@ -425,6 +431,26 @@ namespace TradeWidget
             txtbox_buyingpower.SelectAll();
         }
 
+        private void menuStrip_file_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void menuStrip_tools_orderhist_Click(object sender, EventArgs e)
+        {
+            if (menuStrip_tools_orderhist.Checked)
+            {
+                ordertable.Show();
+            }
+            else
+                ordertable.Hide();
+        }
+
+        private void menuStrip_help_guide_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming Soon");
+        }
+
         // EVENT HANDLERS
         static void client_ExecDetails(object sender, ExecDetailsEventArgs e)
         {
@@ -469,7 +495,7 @@ namespace TradeWidget
                 order_error = true;
 
             Console.WriteLine("Error: " + e.ErrorMsg);
-            MessageBox.Show("Error: " + e.ErrorMsg);
+            /*MessageBox.Show("Error: " + e.ErrorMsg);*/
         }
 
         static void client_TickPrice(object sender, TickPriceEventArgs e)
