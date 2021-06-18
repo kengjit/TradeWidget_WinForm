@@ -495,7 +495,7 @@ namespace TradeWidget
                 order_error = true;
 
             Console.WriteLine("Error: " + e.ErrorMsg);
-            /*MessageBox.Show("Error: " + e.ErrorMsg);*/
+            MessageBox.Show("Error: " + e.ErrorMsg);
         }
 
         static void client_TickPrice(object sender, TickPriceEventArgs e)

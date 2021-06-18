@@ -95,6 +95,7 @@ namespace TradeWidget
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(16, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
@@ -177,7 +178,7 @@ namespace TradeWidget
             // txtbox_buyingpower
             // 
             this.txtbox_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbox_buyingpower.Location = new System.Drawing.Point(175, 447);
+            this.txtbox_buyingpower.Location = new System.Drawing.Point(160, 447);
             this.txtbox_buyingpower.Name = "txtbox_buyingpower";
             this.txtbox_buyingpower.Size = new System.Drawing.Size(154, 23);
             this.txtbox_buyingpower.TabIndex = 10;
@@ -187,7 +188,8 @@ namespace TradeWidget
             // 
             this.label_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_buyingpower.AutoSize = true;
-            this.label_buyingpower.Location = new System.Drawing.Point(89, 451);
+            this.label_buyingpower.ForeColor = System.Drawing.Color.White;
+            this.label_buyingpower.Location = new System.Drawing.Point(71, 450);
             this.label_buyingpower.Name = "label_buyingpower";
             this.label_buyingpower.Size = new System.Drawing.Size(83, 15);
             this.label_buyingpower.TabIndex = 11;
@@ -222,7 +224,7 @@ namespace TradeWidget
             this.grpbox_plan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpbox_plan.Controls.Add(this.radiobtn_1R2R);
             this.grpbox_plan.Controls.Add(this.radiobtn_2RAON);
-            this.grpbox_plan.Location = new System.Drawing.Point(175, 41);
+            this.grpbox_plan.Location = new System.Drawing.Point(177, 41);
             this.grpbox_plan.Name = "grpbox_plan";
             this.grpbox_plan.Size = new System.Drawing.Size(130, 140);
             this.grpbox_plan.TabIndex = 15;
@@ -265,11 +267,11 @@ namespace TradeWidget
             this.table_symbol,
             this.table_entry,
             this.table_stoploss});
-            this.ordertable.Location = new System.Drawing.Point(20, 260);
+            this.ordertable.Location = new System.Drawing.Point(20, 268);
             this.ordertable.Name = "ordertable";
             this.ordertable.RowHeadersVisible = false;
             this.ordertable.RowTemplate.Height = 25;
-            this.ordertable.Size = new System.Drawing.Size(292, 172);
+            this.ordertable.Size = new System.Drawing.Size(294, 172);
             this.ordertable.TabIndex = 16;
             // 
             // table_qty
@@ -432,7 +434,7 @@ namespace TradeWidget
             this.menuStrip_help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(330, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(332, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -488,7 +490,8 @@ namespace TradeWidget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 471);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(0)))), ((int)(((byte)(30)))));
+            this.ClientSize = new System.Drawing.Size(332, 479);
             this.Controls.Add(this.ordertable);
             this.Controls.Add(this.grpbox_plan);
             this.Controls.Add(this.label_buyingpower);
