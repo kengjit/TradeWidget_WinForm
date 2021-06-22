@@ -95,7 +95,7 @@ namespace TradeWidget
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(16, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
@@ -188,7 +188,7 @@ namespace TradeWidget
             // 
             this.label_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_buyingpower.AutoSize = true;
-            this.label_buyingpower.ForeColor = System.Drawing.Color.White;
+            this.label_buyingpower.ForeColor = System.Drawing.Color.Black;
             this.label_buyingpower.Location = new System.Drawing.Point(71, 450);
             this.label_buyingpower.Name = "label_buyingpower";
             this.label_buyingpower.Size = new System.Drawing.Size(83, 15);
@@ -490,7 +490,7 @@ namespace TradeWidget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(0)))), ((int)(((byte)(30)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(332, 479);
             this.Controls.Add(this.ordertable);
             this.Controls.Add(this.grpbox_plan);
@@ -508,6 +508,7 @@ namespace TradeWidget
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.grpbox_plan.ResumeLayout(false);
             this.grpbox_plan.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.error_ticker)).EndInit();

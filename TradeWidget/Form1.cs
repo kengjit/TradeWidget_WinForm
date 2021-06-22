@@ -68,6 +68,12 @@ namespace TradeWidget
             return (int)Math.Floor(decimal.Parse(txtbox_risk.Text) / (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)));
         }
 
+        public bool all_filled()
+        {
+            return !String.IsNullOrEmpty(txtbox_ticker.Text) && !String.IsNullOrEmpty(txtbox_entry.Text) && !String.IsNullOrEmpty(txtbox_stoploss.Text) && !String.IsNullOrEmpty(txtbox_risk.Text) &&
+                !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked);
+        }
+
         public void Place_Bracket_Order(Equity Ticker)
         {
             Bracket bracket = new Bracket();
@@ -77,7 +83,7 @@ namespace TradeWidget
             bracket.parent.Action = ActionSide.Buy;
             bracket.parent.OrderType = OrderType.StopLimit;
             bracket.parent.AuxPrice = decimal.Parse(txtbox_entry.Text);
-            bracket.parent.LimitPrice = bracket.parent.AuxPrice + (decimal) 0.1;
+            bracket.parent.LimitPrice = bracket.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
             bracket.parent.TotalQuantity = Get_Quantity();
             bracket.parent.Transmit = false;
             bracket.parent.OutsideRth = true;
@@ -145,7 +151,7 @@ namespace TradeWidget
             bracket_1.parent.Action = ActionSide.Buy;
             bracket_1.parent.OrderType = OrderType.StopLimit;
             bracket_1.parent.AuxPrice = decimal.Parse(txtbox_entry.Text);
-            bracket_1.parent.LimitPrice = bracket_1.parent.AuxPrice + (decimal)0.1;
+            bracket_1.parent.LimitPrice = bracket_1.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
             bracket_1.parent.TotalQuantity = quantity1;
             bracket_1.parent.Transmit = false;
             bracket_1.parent.OutsideRth = true;
@@ -187,7 +193,7 @@ namespace TradeWidget
             bracket_2.parent.Action = ActionSide.Buy;
             bracket_2.parent.OrderType = OrderType.StopLimit;
             bracket_2.parent.AuxPrice = decimal.Parse(txtbox_entry.Text);
-            bracket_2.parent.LimitPrice = bracket_2.parent.AuxPrice + (decimal)0.1;
+            bracket_2.parent.LimitPrice = bracket_2.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
             bracket_2.parent.TotalQuantity = quantity1;
             bracket_2.parent.Transmit = false;
             bracket_2.parent.OutsideRth = true;
@@ -310,38 +316,11 @@ namespace TradeWidget
                 if (String.IsNullOrEmpty(txtbox_entry.Text))
                     error_entry.SetError(txtbox_entry, "Please enter Entry Price");
                 else
-                {
-                    if (decimal.Parse(txtbox_entry.Text) <= decimal.Parse(txtbox_stoploss.Text))
-                    {
-                        error_entry.SetError(txtbox_entry, "Entry Price must be higher than stoploss");
-                        error_stoploss.SetError(txtbox_stoploss, "Entry Price must be higher than stoploss");
-                    }
-                    else
-                    {
-                        error_entry.Clear();
-                        error_stoploss.Clear();
-                    }
-                }
+                    error_entry.Clear();
                 if (String.IsNullOrEmpty(txtbox_stoploss.Text))
                     error_stoploss.SetError(txtbox_stoploss, "Please enter Stoploss Price");
                 else
-                {
-                    if (decimal.Parse(txtbox_entry.Text) <= decimal.Parse(txtbox_stoploss.Text))
-                    {
-                        error_entry.SetError(txtbox_entry, "Entry Price must be higher than stoploss");
-                        error_stoploss.SetError(txtbox_stoploss, "Entry Price must be higher than stoploss");
-
-                        if (!String.IsNullOrEmpty(txtbox_risk.Text) && (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) > decimal.Parse(txtbox_risk.Text))
-                            error_risk.SetError(txtbox_risk, "Risk amount too low");
-                        else
-                            error_risk.Clear();
-                    }
-                    else
-                    {
-                        error_entry.Clear();
-                        error_stoploss.Clear();
-                    }
-                }
+                    error_stoploss.Clear();
                 if (String.IsNullOrEmpty(txtbox_risk.Text))
                     error_risk.SetError(txtbox_risk, "Please enter Risk Amount");
                 else
@@ -358,6 +337,22 @@ namespace TradeWidget
                 else
                     error_plan.Clear();
 
+                if (all_filled())
+                {
+                    if (decimal.Parse(txtbox_entry.Text) <= decimal.Parse(txtbox_stoploss.Text))
+                    {
+                        error_entry.SetError(txtbox_entry, "Entry Price must be higher than stoploss");
+                        error_stoploss.SetError(txtbox_stoploss, "Entry Price must be higher than stoploss");
+                    }
+                    else if ((decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) > decimal.Parse(txtbox_risk.Text))
+                        error_risk.SetError(txtbox_risk, "Risk amount too low");
+                    else
+                    {
+                        error_risk.Clear();
+                        error_entry.Clear();
+                        error_stoploss.Clear();
+                    }
+                }
             }
         }
 
@@ -433,7 +428,7 @@ namespace TradeWidget
 
         private void menuStrip_file_exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void menuStrip_tools_orderhist_Click(object sender, EventArgs e)
@@ -495,12 +490,17 @@ namespace TradeWidget
                 order_error = true;
 
             Console.WriteLine("Error: " + e.ErrorMsg);
-            MessageBox.Show("Error: " + e.ErrorMsg);
+            /*MessageBox.Show("Error: " + e.ErrorMsg);*/
         }
 
         static void client_TickPrice(object sender, TickPriceEventArgs e)
         {
             Console.WriteLine("Price: " + e.Price + " Tick Type: " + EnumDescConverter.GetEnumDescription(e.TickType));
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
