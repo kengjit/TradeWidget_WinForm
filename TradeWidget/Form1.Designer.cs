@@ -81,6 +81,7 @@ namespace TradeWidget
             this.menuStrip_tools_orderhist = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_help = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_help_guide = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_tools_debug = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbox_plan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.error_ticker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_entry)).BeginInit();
@@ -456,7 +457,8 @@ namespace TradeWidget
             // menuStrip_tools
             // 
             this.menuStrip_tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuStrip_tools_orderhist});
+            this.menuStrip_tools_orderhist,
+            this.menuStrip_tools_debug});
             this.menuStrip_tools.Name = "menuStrip_tools";
             this.menuStrip_tools.Size = new System.Drawing.Size(46, 20);
             this.menuStrip_tools.Text = "&Tools";
@@ -485,6 +487,14 @@ namespace TradeWidget
             this.menuStrip_help_guide.Size = new System.Drawing.Size(105, 22);
             this.menuStrip_help_guide.Text = "Guide";
             this.menuStrip_help_guide.Click += new System.EventHandler(this.menuStrip_help_guide_Click);
+            // 
+            // menuStrip_tools_debug
+            // 
+            this.menuStrip_tools_debug.CheckOnClick = true;
+            this.menuStrip_tools_debug.Name = "menuStrip_tools_debug";
+            this.menuStrip_tools_debug.Size = new System.Drawing.Size(145, 22);
+            this.menuStrip_tools_debug.Text = "Debug Mode";
+            this.menuStrip_tools_debug.Click += new System.EventHandler(this.menuStrip_tools_debug_Click);
             // 
             // Form1
             // 
@@ -581,6 +591,7 @@ namespace TradeWidget
         private System.Windows.Forms.ToolStripMenuItem menuStrip_tools_orderhist;
         private System.Windows.Forms.ToolStripMenuItem menuStrip_help;
         private System.Windows.Forms.ToolStripMenuItem menuStrip_help_guide;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip_tools_debug;
     }
 }
 

@@ -23,6 +23,7 @@ namespace TradeWidget
         private static bool order_placed = false;
         private static bool order_error = false;
         private static int order_error_count = 0;
+        private static bool debugmode = false;
 
         public struct Bracket
         {
@@ -194,7 +195,7 @@ namespace TradeWidget
             bracket_2.parent.OrderType = OrderType.StopLimit;
             bracket_2.parent.AuxPrice = decimal.Parse(txtbox_entry.Text);
             bracket_2.parent.LimitPrice = bracket_2.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
-            bracket_2.parent.TotalQuantity = quantity1;
+            bracket_2.parent.TotalQuantity = quantity2;
             bracket_2.parent.Transmit = false;
             bracket_2.parent.OutsideRth = true;
 
@@ -440,6 +441,15 @@ namespace TradeWidget
             else
                 ordertable.Hide();
         }
+        private void menuStrip_tools_debug_Click(object sender, EventArgs e)
+        {
+            if (menuStrip_tools_debug.Checked)
+            {
+                debugmode = true;
+            }
+            else
+                debugmode = false;
+        }
 
         private void menuStrip_help_guide_Click(object sender, EventArgs e)
         {
@@ -490,7 +500,9 @@ namespace TradeWidget
                 order_error = true;
 
             Console.WriteLine("Error: " + e.ErrorMsg);
-            /*MessageBox.Show("Error: " + e.ErrorMsg);*/
+
+            if (debugmode)
+                MessageBox.Show("Error: " + e.ErrorMsg);
         }
 
         static void client_TickPrice(object sender, TickPriceEventArgs e)
@@ -502,5 +514,7 @@ namespace TradeWidget
         {
             Application.Exit();
         }
+
+
     }
 }
