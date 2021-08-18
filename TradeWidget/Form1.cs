@@ -79,6 +79,12 @@ namespace TradeWidget
         {
             Bracket bracket = new Bracket();
 
+            decimal R;
+            if (radiobtn_2RAON.Checked)
+                R = 2;
+            else 
+                R = decimal.Parse(txtbox_customR.Text);
+
             bracket.parent = new Order();
             bracket.parent.OrderId = NextOrderId;
             bracket.parent.Action = ActionSide.Buy;
@@ -93,7 +99,7 @@ namespace TradeWidget
             bracket.takeprofit.OrderId = NextOrderId + 1;
             bracket.takeprofit.Action = ActionSide.Sell;
             bracket.takeprofit.OrderType = OrderType.Limit;
-            bracket.takeprofit.LimitPrice = 2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) + decimal.Parse(txtbox_entry.Text);
+            bracket.takeprofit.LimitPrice = R * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) + decimal.Parse(txtbox_entry.Text);
             bracket.takeprofit.TotalQuantity = bracket.parent.TotalQuantity;
             bracket.takeprofit.ParentId = bracket.parent.OrderId;
             bracket.takeprofit.Transmit = false;
@@ -257,7 +263,7 @@ namespace TradeWidget
             }
 
             if (!String.IsNullOrEmpty(txtbox_ticker.Text) && !String.IsNullOrEmpty(txtbox_entry.Text) && !String.IsNullOrEmpty(txtbox_stoploss.Text) && !String.IsNullOrEmpty(txtbox_risk.Text)
-                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
+                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked || radiobtn_custom.Checked) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
                 && (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) <= decimal.Parse(txtbox_risk.Text))
             {
                 Ticker = new Equity(txtbox_ticker.Text);
@@ -290,7 +296,7 @@ namespace TradeWidget
                                 break;
                         }
                     }
-                    if (radiobtn_2RAON.Checked)
+                    if (radiobtn_2RAON.Checked || radiobtn_custom.Checked)
                         Place_Bracket_Order(Ticker);
                     else if (radiobtn_1R2R.Checked)
                         Place_Double_Bracket_Order(Ticker);
@@ -514,7 +520,6 @@ namespace TradeWidget
         {
             Application.Exit();
         }
-
 
     }
 }

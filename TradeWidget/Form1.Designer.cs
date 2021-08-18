@@ -45,6 +45,8 @@ namespace TradeWidget
             this.radiobtn_2RAON = new System.Windows.Forms.RadioButton();
             this.radiobtn_1R2R = new System.Windows.Forms.RadioButton();
             this.grpbox_plan = new System.Windows.Forms.GroupBox();
+            this.txtbox_customR = new System.Windows.Forms.TextBox();
+            this.radiobtn_custom = new System.Windows.Forms.RadioButton();
             this.error_ticker = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_entry = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_stoploss = new System.Windows.Forms.ErrorProvider(this.components);
@@ -79,9 +81,9 @@ namespace TradeWidget
             this.menuStrip_file_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_tools = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_tools_orderhist = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip_tools_debug = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_help = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_help_guide = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip_tools_debug = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbox_plan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.error_ticker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_entry)).BeginInit();
@@ -179,7 +181,7 @@ namespace TradeWidget
             // txtbox_buyingpower
             // 
             this.txtbox_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbox_buyingpower.Location = new System.Drawing.Point(160, 447);
+            this.txtbox_buyingpower.Location = new System.Drawing.Point(151, 445);
             this.txtbox_buyingpower.Name = "txtbox_buyingpower";
             this.txtbox_buyingpower.Size = new System.Drawing.Size(154, 23);
             this.txtbox_buyingpower.TabIndex = 10;
@@ -190,7 +192,7 @@ namespace TradeWidget
             this.label_buyingpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_buyingpower.AutoSize = true;
             this.label_buyingpower.ForeColor = System.Drawing.Color.Black;
-            this.label_buyingpower.Location = new System.Drawing.Point(71, 450);
+            this.label_buyingpower.Location = new System.Drawing.Point(62, 448);
             this.label_buyingpower.Name = "label_buyingpower";
             this.label_buyingpower.Size = new System.Drawing.Size(83, 15);
             this.label_buyingpower.TabIndex = 11;
@@ -200,7 +202,7 @@ namespace TradeWidget
             // 
             this.radiobtn_2RAON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radiobtn_2RAON.AutoSize = true;
-            this.radiobtn_2RAON.Location = new System.Drawing.Point(15, 50);
+            this.radiobtn_2RAON.Location = new System.Drawing.Point(15, 30);
             this.radiobtn_2RAON.Name = "radiobtn_2RAON";
             this.radiobtn_2RAON.Size = new System.Drawing.Size(67, 19);
             this.radiobtn_2RAON.TabIndex = 12;
@@ -212,7 +214,7 @@ namespace TradeWidget
             // 
             this.radiobtn_1R2R.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radiobtn_1R2R.AutoSize = true;
-            this.radiobtn_1R2R.Location = new System.Drawing.Point(15, 78);
+            this.radiobtn_1R2R.Location = new System.Drawing.Point(15, 68);
             this.radiobtn_1R2R.Name = "radiobtn_1R2R";
             this.radiobtn_1R2R.Size = new System.Drawing.Size(105, 19);
             this.radiobtn_1R2R.TabIndex = 13;
@@ -223,14 +225,35 @@ namespace TradeWidget
             // grpbox_plan
             // 
             this.grpbox_plan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpbox_plan.Controls.Add(this.txtbox_customR);
+            this.grpbox_plan.Controls.Add(this.radiobtn_custom);
             this.grpbox_plan.Controls.Add(this.radiobtn_1R2R);
             this.grpbox_plan.Controls.Add(this.radiobtn_2RAON);
-            this.grpbox_plan.Location = new System.Drawing.Point(177, 41);
+            this.grpbox_plan.Location = new System.Drawing.Point(168, 41);
             this.grpbox_plan.Name = "grpbox_plan";
             this.grpbox_plan.Size = new System.Drawing.Size(130, 140);
             this.grpbox_plan.TabIndex = 15;
             this.grpbox_plan.TabStop = false;
             this.grpbox_plan.Text = "Plan:";
+            // 
+            // txtbox_customR
+            // 
+            this.txtbox_customR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtbox_customR.Location = new System.Drawing.Point(32, 103);
+            this.txtbox_customR.Name = "txtbox_customR";
+            this.txtbox_customR.Size = new System.Drawing.Size(44, 23);
+            this.txtbox_customR.TabIndex = 15;
+            // 
+            // radiobtn_custom
+            // 
+            this.radiobtn_custom.AutoSize = true;
+            this.radiobtn_custom.Location = new System.Drawing.Point(15, 104);
+            this.radiobtn_custom.Name = "radiobtn_custom";
+            this.radiobtn_custom.Size = new System.Drawing.Size(103, 19);
+            this.radiobtn_custom.TabIndex = 14;
+            this.radiobtn_custom.TabStop = true;
+            this.radiobtn_custom.Text = "              R AON";
+            this.radiobtn_custom.UseVisualStyleBackColor = true;
             // 
             // error_ticker
             // 
@@ -268,11 +291,11 @@ namespace TradeWidget
             this.table_symbol,
             this.table_entry,
             this.table_stoploss});
-            this.ordertable.Location = new System.Drawing.Point(20, 268);
+            this.ordertable.Location = new System.Drawing.Point(20, 266);
             this.ordertable.Name = "ordertable";
             this.ordertable.RowHeadersVisible = false;
             this.ordertable.RowTemplate.Height = 25;
-            this.ordertable.Size = new System.Drawing.Size(294, 172);
+            this.ordertable.Size = new System.Drawing.Size(285, 172);
             this.ordertable.TabIndex = 16;
             // 
             // table_qty
@@ -435,7 +458,7 @@ namespace TradeWidget
             this.menuStrip_help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(332, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(323, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -473,6 +496,14 @@ namespace TradeWidget
             this.menuStrip_tools_orderhist.Text = "Order History";
             this.menuStrip_tools_orderhist.Click += new System.EventHandler(this.menuStrip_tools_orderhist_Click);
             // 
+            // menuStrip_tools_debug
+            // 
+            this.menuStrip_tools_debug.CheckOnClick = true;
+            this.menuStrip_tools_debug.Name = "menuStrip_tools_debug";
+            this.menuStrip_tools_debug.Size = new System.Drawing.Size(145, 22);
+            this.menuStrip_tools_debug.Text = "Debug Mode";
+            this.menuStrip_tools_debug.Click += new System.EventHandler(this.menuStrip_tools_debug_Click);
+            // 
             // menuStrip_help
             // 
             this.menuStrip_help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -488,20 +519,12 @@ namespace TradeWidget
             this.menuStrip_help_guide.Text = "Guide";
             this.menuStrip_help_guide.Click += new System.EventHandler(this.menuStrip_help_guide_Click);
             // 
-            // menuStrip_tools_debug
-            // 
-            this.menuStrip_tools_debug.CheckOnClick = true;
-            this.menuStrip_tools_debug.Name = "menuStrip_tools_debug";
-            this.menuStrip_tools_debug.Size = new System.Drawing.Size(145, 22);
-            this.menuStrip_tools_debug.Text = "Debug Mode";
-            this.menuStrip_tools_debug.Click += new System.EventHandler(this.menuStrip_tools_debug_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(332, 479);
+            this.ClientSize = new System.Drawing.Size(323, 477);
             this.Controls.Add(this.ordertable);
             this.Controls.Add(this.grpbox_plan);
             this.Controls.Add(this.label_buyingpower);
@@ -592,6 +615,8 @@ namespace TradeWidget
         private System.Windows.Forms.ToolStripMenuItem menuStrip_help;
         private System.Windows.Forms.ToolStripMenuItem menuStrip_help_guide;
         private System.Windows.Forms.ToolStripMenuItem menuStrip_tools_debug;
+        private System.Windows.Forms.RadioButton radiobtn_custom;
+        private System.Windows.Forms.TextBox txtbox_customR;
     }
 }
 
