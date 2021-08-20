@@ -141,6 +141,7 @@ namespace TradeWidget
             this.txtbox_ticker.Size = new System.Drawing.Size(97, 23);
             this.txtbox_ticker.TabIndex = 4;
             this.txtbox_ticker.Click += new System.EventHandler(this.txtbox_ticker_Click);
+            this.txtbox_ticker.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_entry_KeyPress);
             // 
             // txtbox_entry
             // 
@@ -187,6 +188,7 @@ namespace TradeWidget
             this.txtbox_buyingpower.Size = new System.Drawing.Size(154, 23);
             this.txtbox_buyingpower.TabIndex = 10;
             this.txtbox_buyingpower.Click += new System.EventHandler(this.txtbox_buyingpower_Click);
+            this.txtbox_buyingpower.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_buyingpower_KeyPress);
             // 
             // label_buyingpower
             // 
@@ -245,6 +247,7 @@ namespace TradeWidget
             this.txtbox_customR.Name = "txtbox_customR";
             this.txtbox_customR.Size = new System.Drawing.Size(44, 23);
             this.txtbox_customR.TabIndex = 15;
+            this.txtbox_customR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_customR_KeyPress);
             // 
             // radiobtn_custom
             // 
