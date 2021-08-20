@@ -62,11 +62,11 @@ namespace TradeWidget
 
         public int Get_Quantity()
         {
-            if ((int)Math.Floor(decimal.Parse(txtbox_risk.Text) / (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text))) >= (int)Math.Floor(decimal.Parse(txtbox_buyingpower.Text) / decimal.Parse(txtbox_entry.Text)))
+            if ((int)Math.Floor(decimal.Parse(txtbox_risk.Text) / Math.Abs(decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text))) >= (int)Math.Floor(decimal.Parse(txtbox_buyingpower.Text) / decimal.Parse(txtbox_entry.Text)))
             {
                 return (int)Math.Floor(decimal.Parse(txtbox_buyingpower.Text) / decimal.Parse(txtbox_entry.Text));
             }
-            return (int)Math.Floor(decimal.Parse(txtbox_risk.Text) / (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)));
+            return (int)Math.Floor(decimal.Parse(txtbox_risk.Text) / Math.Abs(decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)));
         }
 
         public bool all_filled()
@@ -87,19 +87,19 @@ namespace TradeWidget
 
             bracket.parent = new Order();
             bracket.parent.OrderId = NextOrderId;
-            bracket.parent.Action = ActionSide.Buy;
+            bracket.parent.Action = btn_long_short.Text == "LONG" ? ActionSide.Buy : ActionSide.Sell;
             bracket.parent.OrderType = OrderType.StopLimit;
             bracket.parent.AuxPrice = decimal.Parse(txtbox_entry.Text);
-            bracket.parent.LimitPrice = bracket.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
+            bracket.parent.LimitPrice = btn_long_short.Text == "LONG" ? bracket.parent.AuxPrice + Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2) : bracket.parent.AuxPrice - Math.Round((decimal)0.2 * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)), 2);
             bracket.parent.TotalQuantity = Get_Quantity();
             bracket.parent.Transmit = false;
             bracket.parent.OutsideRth = true;
 
             bracket.takeprofit = new Order();
-            bracket.takeprofit.OrderId = NextOrderId + 1;
-            bracket.takeprofit.Action = ActionSide.Sell;
+            bracket.takeprofit.OrderId = NextOrderId + 1; 
+            bracket.takeprofit.Action = btn_long_short.Text == "LONG" ? ActionSide.Sell : ActionSide.Buy;
             bracket.takeprofit.OrderType = OrderType.Limit;
-            bracket.takeprofit.LimitPrice = R * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) + decimal.Parse(txtbox_entry.Text);
+            bracket.takeprofit.LimitPrice = btn_long_short.Text == "LONG" ? R * (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) + decimal.Parse(txtbox_entry.Text) : decimal.Parse(txtbox_entry.Text) - R * (decimal.Parse(txtbox_stoploss.Text) - decimal.Parse(txtbox_entry.Text));
             bracket.takeprofit.TotalQuantity = bracket.parent.TotalQuantity;
             bracket.takeprofit.ParentId = bracket.parent.OrderId;
             bracket.takeprofit.Transmit = false;
@@ -116,7 +116,7 @@ namespace TradeWidget
 
             bracket.stopLoss = new Order();
             bracket.stopLoss.OrderId = NextOrderId + 3;
-            bracket.stopLoss.Action = ActionSide.Sell;
+            bracket.stopLoss.Action = btn_long_short.Text == "LONG" ? ActionSide.Sell : ActionSide.Buy;
             bracket.stopLoss.OrderType = OrderType.Stop;
             bracket.stopLoss.AuxPrice = decimal.Parse(txtbox_stoploss.Text);
             bracket.stopLoss.TotalQuantity = bracket.parent.TotalQuantity;
@@ -263,8 +263,8 @@ namespace TradeWidget
             }
 
             if (!String.IsNullOrEmpty(txtbox_ticker.Text) && !String.IsNullOrEmpty(txtbox_entry.Text) && !String.IsNullOrEmpty(txtbox_stoploss.Text) && !String.IsNullOrEmpty(txtbox_risk.Text)
-                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked || (radiobtn_custom.Checked && !String.IsNullOrEmpty(txtbox_customR.Text))) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
-                && (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) <= decimal.Parse(txtbox_risk.Text))
+                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked || (radiobtn_custom.Checked && !String.IsNullOrEmpty(txtbox_customR.Text))) && ((btn_long_short.Text == "LONG" && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)) || (btn_long_short.Text == "SHORT" && decimal.Parse(txtbox_entry.Text) < decimal.Parse(txtbox_stoploss.Text)))
+                && Math.Abs(decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) <= decimal.Parse(txtbox_risk.Text))
             {
                 Ticker = new Equity(txtbox_ticker.Text);
                 // Remove all errors if exists
