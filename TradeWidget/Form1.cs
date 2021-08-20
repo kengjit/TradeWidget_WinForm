@@ -263,7 +263,7 @@ namespace TradeWidget
             }
 
             if (!String.IsNullOrEmpty(txtbox_ticker.Text) && !String.IsNullOrEmpty(txtbox_entry.Text) && !String.IsNullOrEmpty(txtbox_stoploss.Text) && !String.IsNullOrEmpty(txtbox_risk.Text)
-                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked || radiobtn_custom.Checked) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
+                && !String.IsNullOrEmpty(txtbox_buyingpower.Text) && (radiobtn_2RAON.Checked || radiobtn_1R2R.Checked || (radiobtn_custom.Checked && !String.IsNullOrEmpty(txtbox_customR.Text))) && decimal.Parse(txtbox_entry.Text) > decimal.Parse(txtbox_stoploss.Text)
                 && (decimal.Parse(txtbox_entry.Text) - decimal.Parse(txtbox_stoploss.Text)) <= decimal.Parse(txtbox_risk.Text))
             {
                 Ticker = new Equity(txtbox_ticker.Text);
@@ -462,7 +462,21 @@ namespace TradeWidget
             MessageBox.Show("Coming Soon");
         }
 
+        private void btn_long_short_Click(object sender, EventArgs e)
+        {
+            if (btn_long_short.Text == "LONG")
+            {
+                btn_long_short.Text = "SHORT";
+                this.BackColor = Color.LightPink;
+            }
+            else
+            {
+                btn_long_short.Text = "LONG";
+                this.BackColor = Color.PaleGreen;
+            }
+        }
         // EVENT HANDLERS
+
         static void client_ExecDetails(object sender, ExecDetailsEventArgs e)
         {
             Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}",
@@ -520,6 +534,5 @@ namespace TradeWidget
         {
             Application.Exit();
         }
-
     }
 }

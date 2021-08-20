@@ -59,5 +59,16 @@ namespace TradeWidget.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kisspng_button_computer_icons_electrical_switches_on_off_button_5b08a0453658f9_1304630415272919732226 {
+            get {
+                object obj = ResourceManager.GetObject("kisspng-button-computer-icons-electrical-switches-on-off-button-5b08a0453658f9.13" +
+                        "04630415272919732226", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
